@@ -19,22 +19,28 @@ const checkToken = (req, res, next) => {
 
 // define the first route
 app.get("/api", function (req, res) {
-    res.send("This is a dummy auth server")
+    console.log('\nIncoming Request is\n', req);
+    res.send("This is a dummy auth server");
 });
 
 app.post('/api', (req, res) => {
-    const dummyUser = {
-        name: 'Sumit',
-        id: 1,
-        email: 'sumit.singh1@yopmail.com'
-    };
+    const name = 'Sumit';
+    const id = 1;
+    const email = 'sumit.singh1@yopmail.com'
+
+    console.log('\nIncoming Request is\n', req);
+
     const token = jwt.sign(
-        { dummyUser },
-        '3jsniIXK64'
+        {
+            name,
+            email,
+            id,
+        },
+        'JKjvzHqoHxyRJojChDEq7TVzBJlFIwzRt4AJbsIF55FSBMcp'
     );
 
     res.status(200).json({
-        token: token
+        jwt: token
     });
 });
 
